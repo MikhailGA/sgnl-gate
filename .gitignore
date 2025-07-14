@@ -1,0 +1,6 @@
+.rebuild.compose
+.restore-hash
+node_modules
+.data
+.history
+dist

@@ -1,0 +1,4 @@
+set $app_endpoint "http://app:3000";
+set $server_endpoint "http://server:3001";
+set $s3_endpoint "http://minio:9000";
+set $adminer_endpoint "http://adminer:8080";
