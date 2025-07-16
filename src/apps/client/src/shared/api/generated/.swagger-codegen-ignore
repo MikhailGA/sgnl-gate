@@ -1,0 +1,6 @@
+index.ts
+git_push.sh
+custom.d.ts
+api_test.spec.ts
+.gitignore
+.swagger-codegen
