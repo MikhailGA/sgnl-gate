@@ -28,8 +28,8 @@ then
     error "SWAGGER_ROOT VAR is not set"
 fi
 
-TOOL_VERSION=3.0.24
-TOOL_TYPE=swagger-codegen-cli.jar
+TOOL_VERSION=7.6.0
+TOOL_TYPE=openapi-generator-cli.jar
 
 TOOL_PATH="${SWAGGER_ROOT}/.bin/${TOOL_VERSION}"
 TOOL_BIN="${TOOL_PATH}/${TOOL_TYPE}"
@@ -41,7 +41,7 @@ then
     mkdir -p "$TOOL_PATH" || error "creating path $TOOL_PATH"
     (cd "$TOOL_PATH" \
         && wget -O ${TOOL_TYPE} \
-        "https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/${TOOL_VERSION}/swagger-codegen-cli-${TOOL_VERSION}.jar"
+        "https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/${TOOL_VERSION}/openapi-generator-cli-${TOOL_VERSION}.jar"
 
     )
 fi
@@ -80,12 +80,14 @@ function GENERATE() {
     # Use the downloaded file as input
     java -jar "${TOOL_BIN}" \
         generate \
-        -D supportsES6=true \
-        --template-dir "${SWAGGER_ROOT}"/templates \
         --input-spec "$TEMP_SPEC_FILE" \
-        --lang typescript-fetch \
+        --generator-name typescript-axios \
+        --additional-properties supportsES6=true \
+        --type-mappings DateTime=Date \
+        --engine "mustache" \
+        --skip-validate-spec \
         --output "$TARGET"
-
+    
     # Clean up
     rm -f "$TEMP_SPEC_FILE"
     rm "$IGNORE"

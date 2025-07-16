@@ -12,7 +12,7 @@ import { Api } from '../../shared/api/ApiClient';
 
 export default function HomePage() {
   React.useEffect(function test() {
-    Api.instance.appApi.checkDatabase().then((result) => {
+    Api.instance.appApi.appControllerCheckDatabase().then((result) => {
       console.log(result);
     });
   }, []);
