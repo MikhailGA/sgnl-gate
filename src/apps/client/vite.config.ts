@@ -12,7 +12,7 @@ export default defineConfig(() => ({
     host: 'localhost',
   },
   preview: {
-    port: 4200,
+    port: 3003,
     host: 'localhost',
   },
   plugins: [react(), nxViteTsPaths(), nxCopyAssetsPlugin(['*.md'])],
