@@ -12,6 +12,7 @@
     "@nestjs/core": "^11.0.0",
     "@nestjs/platform-express": "^11.0.0",
     "@nestjs/swagger": "^11.2.0",
+    "@nestjs/typeorm": "^11.0.0",
     "@react-router/node": "^7.2.0",
     "@react-router/serve": "^7.2.0",
     "axios": "^1.6.0",
@@ -23,7 +24,9 @@
     "react-dom": "19.0.0",
     "react-router": "^7.2.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.0"
+    "rxjs": "^7.8.0",
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.3.25"
   },
   "devDependencies": {
     "@eslint/js": "^9.8.0",
