@@ -14,7 +14,7 @@ export class AppController {
     return this.appService.getData();
   }
 
-  @ApiOperation({ summary: 'Check database connection' })
+  @AdvancedApiOperation()
   @ApiResponse({
     status: 200,
     description: 'Database connection status',

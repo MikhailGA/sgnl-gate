@@ -19,6 +19,7 @@ import {
 import { UserService } from '../services/user.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { User } from '../entities/user.entity';
+import { AdvancedApiOperation } from '../utils';
 
 @ApiTags('Users')
 @ApiBearerAuth()
@@ -27,19 +28,11 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create a new user' })
+  @AdvancedApiOperation()
   @ApiResponse({
     status: 201,
     description: 'User successfully created',
     type: User,
-  })
-  @ApiResponse({
-    status: 400,
-    description: 'Invalid data',
-  })
-  @ApiResponse({
-    status: 409,
-    description: 'User with this email already exists',
   })
   async create(@Body() createUserDto: CreateUserDto): Promise<User> {
     const existingUser = await this.userService.findByEmail(
@@ -56,7 +49,7 @@ export class UserController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all users' })
+  @AdvancedApiOperation()
   @ApiResponse({
     status: 200,
     description: 'List of users',
@@ -67,7 +60,7 @@ export class UserController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get user by ID' })
+  @AdvancedApiOperation()
   @ApiParam({ name: 'id', description: 'User ID', type: 'number' })
   @ApiResponse({
     status: 200,
@@ -87,7 +80,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete user' })
+  @AdvancedApiOperation()
   @ApiParam({ name: 'id', description: 'User ID', type: 'number' })
   @ApiResponse({
     status: 200,
@@ -106,7 +99,7 @@ export class UserController {
   }
 
   @Get('stats/count')
-  @ApiOperation({ summary: 'Get users count' })
+  @AdvancedApiOperation()
   @ApiResponse({
     status: 200,
     description: 'Number of users in database',
