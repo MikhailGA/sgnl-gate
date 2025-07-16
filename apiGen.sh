@@ -8,4 +8,4 @@ SWAGGER_ROOT=${PROJECT_ROOT}/tools/swagger-codegen
 . "${SWAGGER_ROOT}"/tool.sh
 
 
-GENERATE "https://dev1.cf:3200/swagger-json" "${PROJECT_ROOT}/app/src/shared/api/generated"
+GENERATE "http://localhost:3001/swagger-json" "${PROJECT_ROOT}/src/apps/client/src/shared/api/generated"
