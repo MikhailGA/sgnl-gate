@@ -4,14 +4,20 @@ import {
   $folderTree,
   FolderTreeGate,
   RootFoldersGate,
+  fetchRootFoldersFx,
+  fetchFolderTreeFx,
 } from '../model';
 
 export const useRootFolders = () => {
   useGate(RootFoldersGate);
-  return useUnit($rootFolders);
+  const rootFolders = useUnit($rootFolders);
+  const loading = useUnit(fetchRootFoldersFx.pending);
+  return { rootFolders, loading };
 };
 
 export const useFolderTree = (rootId: number) => {
-  useGate(FolderTreeGate);
-  return useUnit($folderTree);
+  useGate(FolderTreeGate, { rootId });
+  const folderTree = useUnit($folderTree);
+  const loading = useUnit(fetchFolderTreeFx.pending);
+  return { folderTree, loading };
 };
