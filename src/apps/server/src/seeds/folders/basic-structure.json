@@ -1,0 +1,76 @@
+{
+  "name": "Root",
+  "permissions": true,
+  "children": [
+    {
+      "name": "Documents",
+      "permissions": true,
+      "children": [
+        {
+          "name": "Projects",
+          "permissions": true,
+          "children": [
+            {
+              "name": "Active",
+              "permissions": true,
+              "children": []
+            },
+            {
+              "name": "Archive",
+              "permissions": false,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "Templates",
+          "permissions": true,
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "Media",
+      "permissions": true,
+      "children": [
+        {
+          "name": "Images",
+          "permissions": true,
+          "children": [
+            {
+              "name": "Photos",
+              "permissions": true,
+              "children": []
+            },
+            {
+              "name": "Screenshots",
+              "permissions": true,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "Videos",
+          "permissions": false,
+          "children": []
+        }
+      ]
+    },
+    {
+      "name": "System",
+      "permissions": false,
+      "children": [
+        {
+          "name": "Logs",
+          "permissions": false,
+          "children": []
+        },
+        {
+          "name": "Backups",
+          "permissions": false,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

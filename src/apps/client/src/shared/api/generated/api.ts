@@ -45,6 +45,31 @@ export interface AppControllerCheckDatabase200Response {
 /**
  * 
  * @export
+ * @interface CreateFolderDto
+ */
+export interface CreateFolderDto {
+    /**
+     * Folder name
+     * @type {string}
+     * @memberof CreateFolderDto
+     */
+    'name': string;
+    /**
+     * Folder permissions
+     * @type {boolean}
+     * @memberof CreateFolderDto
+     */
+    'permissions': boolean;
+    /**
+     * Parent folder ID
+     * @type {number}
+     * @memberof CreateFolderDto
+     */
+    'parentId'?: number;
+}
+/**
+ * 
+ * @export
  * @interface CreateUserDto
  */
 export interface CreateUserDto {
@@ -66,6 +91,111 @@ export interface CreateUserDto {
      * @memberof CreateUserDto
      */
     'age'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface Folder
+ */
+export interface Folder {
+    /**
+     * Unique folder identifier
+     * @type {number}
+     * @memberof Folder
+     */
+    'id': number;
+    /**
+     * Folder name
+     * @type {string}
+     * @memberof Folder
+     */
+    'name': string;
+    /**
+     * Folder permissions
+     * @type {boolean}
+     * @memberof Folder
+     */
+    'permissions': boolean;
+    /**
+     * Parent folder
+     * @type {Folder}
+     * @memberof Folder
+     */
+    'parent'?: Folder;
+    /**
+     * Child folders
+     * @type {Array<Folder>}
+     * @memberof Folder
+     */
+    'children': Array<Folder>;
+    /**
+     * Record creation date
+     * @type {Date}
+     * @memberof Folder
+     */
+    'createdAt': Date;
+    /**
+     * Last update date
+     * @type {Date}
+     * @memberof Folder
+     */
+    'updatedAt': Date;
+}
+/**
+ * 
+ * @export
+ * @interface FolderDto
+ */
+export interface FolderDto {
+    /**
+     * Folder ID
+     * @type {number}
+     * @memberof FolderDto
+     */
+    'id': number;
+    /**
+     * Folder name
+     * @type {string}
+     * @memberof FolderDto
+     */
+    'name': string;
+    /**
+     * Folder permissions
+     * @type {boolean}
+     * @memberof FolderDto
+     */
+    'permissions': boolean;
+    /**
+     * Child folders
+     * @type {Array<FolderDto>}
+     * @memberof FolderDto
+     */
+    'children': Array<FolderDto>;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateFolderDto
+ */
+export interface UpdateFolderDto {
+    /**
+     * Folder name
+     * @type {string}
+     * @memberof UpdateFolderDto
+     */
+    'name'?: string;
+    /**
+     * Folder permissions
+     * @type {boolean}
+     * @memberof UpdateFolderDto
+     */
+    'permissions'?: boolean;
+    /**
+     * Parent folder ID
+     * @type {number}
+     * @memberof UpdateFolderDto
+     */
+    'parentId'?: number;
 }
 /**
  * 
@@ -282,6 +412,663 @@ export class AppApi extends BaseAPI {
      */
     public appControllerGetData(options?: RawAxiosRequestConfig) {
         return AppApiFp(this.configuration).appControllerGetData(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * FoldersApi - axios parameter creator
+ * @export
+ */
+export const FoldersApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary create
+         * @param {CreateFolderDto} createFolderDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerCreate: async (createFolderDto: CreateFolderDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createFolderDto' is not null or undefined
+            assertParamExists('folderControllerCreate', 'createFolderDto', createFolderDto)
+            const localVarPath = `/api/folders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createFolderDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary findAll
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerFindAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/folders`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary findOne
+         * @param {number} id Folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerFindOne: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('folderControllerFindOne', 'id', id)
+            const localVarPath = `/api/folders/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary getAncestors
+         * @param {number} id Folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerGetAncestors: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('folderControllerGetAncestors', 'id', id)
+            const localVarPath = `/api/folders/{id}/ancestors`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary getDescendants
+         * @param {number} id Folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerGetDescendants: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('folderControllerGetDescendants', 'id', id)
+            const localVarPath = `/api/folders/{id}/descendants`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary getRootFolders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerGetRootFolders: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/folders/roots`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary getTreeByRootId
+         * @param {number} rootId Root folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerGetTreeByRootId: async (rootId: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'rootId' is not null or undefined
+            assertParamExists('folderControllerGetTreeByRootId', 'rootId', rootId)
+            const localVarPath = `/api/folders/tree/{rootId}`
+                .replace(`{${"rootId"}}`, encodeURIComponent(String(rootId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary remove
+         * @param {number} id Folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerRemove: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('folderControllerRemove', 'id', id)
+            const localVarPath = `/api/folders/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary update
+         * @param {number} id Folder ID
+         * @param {UpdateFolderDto} updateFolderDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerUpdate: async (id: number, updateFolderDto: UpdateFolderDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('folderControllerUpdate', 'id', id)
+            // verify required parameter 'updateFolderDto' is not null or undefined
+            assertParamExists('folderControllerUpdate', 'updateFolderDto', updateFolderDto)
+            const localVarPath = `/api/folders/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateFolderDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * FoldersApi - functional programming interface
+ * @export
+ */
+export const FoldersApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = FoldersApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary create
+         * @param {CreateFolderDto} createFolderDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async folderControllerCreate(createFolderDto: CreateFolderDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Folder>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.folderControllerCreate(createFolderDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.folderControllerCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary findAll
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async folderControllerFindAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Folder>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.folderControllerFindAll(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.folderControllerFindAll']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary findOne
+         * @param {number} id Folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async folderControllerFindOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Folder>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.folderControllerFindOne(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.folderControllerFindOne']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary getAncestors
+         * @param {number} id Folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async folderControllerGetAncestors(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Folder>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.folderControllerGetAncestors(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.folderControllerGetAncestors']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary getDescendants
+         * @param {number} id Folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async folderControllerGetDescendants(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Folder>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.folderControllerGetDescendants(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.folderControllerGetDescendants']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary getRootFolders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async folderControllerGetRootFolders(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.folderControllerGetRootFolders(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.folderControllerGetRootFolders']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary getTreeByRootId
+         * @param {number} rootId Root folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async folderControllerGetTreeByRootId(rootId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<FolderDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.folderControllerGetTreeByRootId(rootId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.folderControllerGetTreeByRootId']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary remove
+         * @param {number} id Folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async folderControllerRemove(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.folderControllerRemove(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.folderControllerRemove']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary update
+         * @param {number} id Folder ID
+         * @param {UpdateFolderDto} updateFolderDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async folderControllerUpdate(id: number, updateFolderDto: UpdateFolderDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Folder>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.folderControllerUpdate(id, updateFolderDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FoldersApi.folderControllerUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * FoldersApi - factory interface
+ * @export
+ */
+export const FoldersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = FoldersApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary create
+         * @param {CreateFolderDto} createFolderDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerCreate(createFolderDto: CreateFolderDto, options?: any): AxiosPromise<Folder> {
+            return localVarFp.folderControllerCreate(createFolderDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary findAll
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerFindAll(options?: any): AxiosPromise<Array<Folder>> {
+            return localVarFp.folderControllerFindAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary findOne
+         * @param {number} id Folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerFindOne(id: number, options?: any): AxiosPromise<Folder> {
+            return localVarFp.folderControllerFindOne(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary getAncestors
+         * @param {number} id Folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerGetAncestors(id: number, options?: any): AxiosPromise<Array<Folder>> {
+            return localVarFp.folderControllerGetAncestors(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary getDescendants
+         * @param {number} id Folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerGetDescendants(id: number, options?: any): AxiosPromise<Array<Folder>> {
+            return localVarFp.folderControllerGetDescendants(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary getRootFolders
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerGetRootFolders(options?: any): AxiosPromise<Array<string>> {
+            return localVarFp.folderControllerGetRootFolders(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary getTreeByRootId
+         * @param {number} rootId Root folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerGetTreeByRootId(rootId: number, options?: any): AxiosPromise<FolderDto> {
+            return localVarFp.folderControllerGetTreeByRootId(rootId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary remove
+         * @param {number} id Folder ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerRemove(id: number, options?: any): AxiosPromise<void> {
+            return localVarFp.folderControllerRemove(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary update
+         * @param {number} id Folder ID
+         * @param {UpdateFolderDto} updateFolderDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        folderControllerUpdate(id: number, updateFolderDto: UpdateFolderDto, options?: any): AxiosPromise<Folder> {
+            return localVarFp.folderControllerUpdate(id, updateFolderDto, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * FoldersApi - object-oriented interface
+ * @export
+ * @class FoldersApi
+ * @extends {BaseAPI}
+ */
+export class FoldersApi extends BaseAPI {
+    /**
+     * 
+     * @summary create
+     * @param {CreateFolderDto} createFolderDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public folderControllerCreate(createFolderDto: CreateFolderDto, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).folderControllerCreate(createFolderDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary findAll
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public folderControllerFindAll(options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).folderControllerFindAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary findOne
+     * @param {number} id Folder ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public folderControllerFindOne(id: number, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).folderControllerFindOne(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary getAncestors
+     * @param {number} id Folder ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public folderControllerGetAncestors(id: number, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).folderControllerGetAncestors(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary getDescendants
+     * @param {number} id Folder ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public folderControllerGetDescendants(id: number, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).folderControllerGetDescendants(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary getRootFolders
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public folderControllerGetRootFolders(options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).folderControllerGetRootFolders(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary getTreeByRootId
+     * @param {number} rootId Root folder ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public folderControllerGetTreeByRootId(rootId: number, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).folderControllerGetTreeByRootId(rootId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary remove
+     * @param {number} id Folder ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public folderControllerRemove(id: number, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).folderControllerRemove(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary update
+     * @param {number} id Folder ID
+     * @param {UpdateFolderDto} updateFolderDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FoldersApi
+     */
+    public folderControllerUpdate(id: number, updateFolderDto: UpdateFolderDto, options?: RawAxiosRequestConfig) {
+        return FoldersApiFp(this.configuration).folderControllerUpdate(id, updateFolderDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

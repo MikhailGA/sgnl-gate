@@ -1,4 +1,8 @@
 {
   "nxConsole.nxWorkspacePath": "src",
-  "nxConsole.generateAiAgentRules": true
+  "nxConsole.generateAiAgentRules": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.formatOnSave": true,
 }

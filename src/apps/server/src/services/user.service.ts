@@ -22,6 +22,10 @@ export class UserService {
     });
   }
 
+  async clear(): Promise<void> {
+    return await this.userRepository.clear();
+  }
+
   async findOne(id: number): Promise<User | null> {
     return await this.userRepository.findOne({ where: { id } });
   }

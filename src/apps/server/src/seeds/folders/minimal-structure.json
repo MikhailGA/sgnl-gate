@@ -1,0 +1,21 @@
+{
+  "name": "Simple",
+  "permissions": true,
+  "children": [
+    {
+      "name": "Work",
+      "permissions": true,
+      "children": []
+    },
+    {
+      "name": "Personal",
+      "permissions": true,
+      "children": []
+    },
+    {
+      "name": "Private",
+      "permissions": false,
+      "children": []
+    }
+  ]
+}

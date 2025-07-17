@@ -1,0 +1,87 @@
+{
+  "name": "Corporate",
+  "permissions": true,
+  "children": [
+    {
+      "name": "Departments",
+      "permissions": true,
+      "children": [
+        {
+          "name": "HR",
+          "permissions": true,
+          "children": [
+            {
+              "name": "Policies",
+              "permissions": true,
+              "children": []
+            },
+            {
+              "name": "Recruitment",
+              "permissions": false,
+              "children": [
+                {
+                  "name": "Candidates",
+                  "permissions": false,
+                  "children": []
+                },
+                {
+                  "name": "Interviews",
+                  "permissions": false,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Finance",
+          "permissions": false,
+          "children": [
+            {
+              "name": "Reports",
+              "permissions": false,
+              "children": []
+            },
+            {
+              "name": "Budget",
+              "permissions": false,
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "IT",
+          "permissions": true,
+          "children": [
+            {
+              "name": "Documentation",
+              "permissions": true,
+              "children": []
+            },
+            {
+              "name": "Infrastructure",
+              "permissions": false,
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Shared",
+      "permissions": true,
+      "children": [
+        {
+          "name": "Common",
+          "permissions": true,
+          "children": []
+        },
+        {
+          "name": "Resources",
+          "permissions": true,
+          "children": []
+        }
+      ]
+    }
+  ]
+}
