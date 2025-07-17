@@ -4,9 +4,8 @@ import { alpha } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import { AppTheme } from '../../shared/ui/AppTheme';
-import { SideMenu } from '../../shared/ui';
-import { mainListItems } from '../../shared/config';
+import { AppTheme, SideMenu } from '@client/shared/ui';
+import { mainListItems } from '@client/shared/config';
 
 interface LayoutProps {
   disableCustomTheme?: boolean;

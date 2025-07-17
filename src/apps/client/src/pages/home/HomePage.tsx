@@ -10,7 +10,7 @@ import {
 import WelcomeIcon from '@mui/icons-material/WavingHand';
 import CodeIcon from '@mui/icons-material/Code';
 import { useNavigate } from 'react-router';
-import { AppRoutes } from '../../shared/config';
+import { AppRoutes } from '@client/shared/config';
 
 export default function HomePage() {
   const navigate = useNavigate();

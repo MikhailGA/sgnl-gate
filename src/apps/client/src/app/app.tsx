@@ -1,10 +1,8 @@
-// Uncomment this line to use CSS modules
-// import styles from './app.module.scss';
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layout from './layout';
-import HomePage from '../pages/home';
-import FoldersPage from '../pages/folders';
-import { AppRoutes, AppRouteChildren } from '../shared/config';
+import { AppRouteChildren, AppRoutes } from '@client/shared/config';
+import HomePage from '@client/pages/home';
+import FoldersPage from '@client/pages/folders';
 
 const router = createBrowserRouter([
   {
