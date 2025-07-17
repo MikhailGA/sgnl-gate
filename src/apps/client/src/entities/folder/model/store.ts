@@ -32,9 +32,3 @@ export const $loading = combine(
   fetchRootFoldersFx.pending,
   (pending1, pending2) => pending1 || pending2,
 );
-
-export const $error = combine(
-  fetchFolderTreeFx.failData,
-  fetchRootFoldersFx.failData,
-  (error1, error2) => error1 || error2,
-);

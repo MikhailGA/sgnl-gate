@@ -1,11 +1,9 @@
 export const AppRoutes = {
   HOME: '/',
-  TASKS: '/tasks',
   FOLDERS: '/folders',
 } as const;
 
 export const AppRouteChildren = {
-  TASKS: 'tasks',
   FOLDERS: 'folders',
 } as const;
 
