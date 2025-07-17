@@ -16,7 +16,7 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   const handleStartTasks = () => {
-    navigate(AppRoutes.TASKS);
+    navigate(AppRoutes.FOLDERS);
   };
 
   return (
@@ -24,35 +24,78 @@ export default function HomePage() {
       <Box sx={{ mb: 6 }}>
         <WelcomeIcon sx={{ fontSize: 60, color: 'primary.main', mb: 2 }} />
         <Typography variant="h3" component="h1" sx={{ fontWeight: 700, mb: 2 }}>
-          Добро пожаловать!
+          Техническое интервью - SIGNAL
         </Typography>
         <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
-          Система тестирования знаний TypeScript
+          Live-coding задание для технической оценки кандидатов
         </Typography>
       </Box>
 
       <Stack spacing={4}>
-        <Card sx={{ p: 4, textAlign: 'left' }}>
-          <CardContent>
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-              <CodeIcon sx={{ mr: 2, color: 'primary.main' }} />
-              <Typography variant="h5" sx={{ fontWeight: 600 }}>
-                О приложении
+        <Stack spacing={3}>
+          <Card sx={{ p: 4, textAlign: 'left' }}>
+            <CardContent>
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                <CodeIcon sx={{ mr: 2, color: 'primary.main' }} />
+                <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                  Регламент интервью
+                </Typography>
+              </Box>
+              <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+                Данное тестовое задание является частью технического
+                собеседования в компанию SIGNAL. Вам предстоит
+                продемонстрировать навыки разработки в режиме live-coding.
               </Typography>
-            </Box>
-            <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-              Данное приложение предназначено для тестирования ваших знаний
-              TypeScript. Вам предстоит решить ряд задач, связанных с различными
-              аспектами языка.
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              • Работа со структурами данных и папками
-              <br />
-              • Типизация и интерфейсы
-              <br />• Практические задачи программирования
-            </Typography>
-          </CardContent>
-        </Card>
+              <Typography variant="body2" color="text.secondary">
+                <strong>Время выполнения:</strong> 1 - 1.5 часа
+                <br />
+                <strong>Разрешенные инструменты:</strong> любые на ваше
+                усмотрение
+                <br />
+                <strong>Взаимодействие:</strong> вы можете задавать уточняющие
+                вопросы по задаче и обсуждать нюансы реализации с интервьюером
+              </Typography>
+            </CardContent>
+          </Card>
+
+          <Card sx={{ p: 4, textAlign: 'left' }}>
+            <CardContent>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+                Технологический стек
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                • <strong>React</strong> - библиотека для создания
+                пользовательских интерфейсов
+                <br />• <strong>TypeScript</strong> - типизированный JavaScript
+                <br />• <strong>Effector</strong> - библиотека для управления
+                состоянием
+                <br />• <strong>Material-UI (MUI)</strong> - компоненты и стили
+              </Typography>
+            </CardContent>
+          </Card>
+
+          <Card sx={{ p: 4, textAlign: 'left' }}>
+            <CardContent>
+              <Typography variant="h6" sx={{ fontWeight: 600, mb: 2 }}>
+                Критерии оценки
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                • <strong>Архитектурные решения:</strong> понимание паттернов
+                проектирования, декомпозиция задач
+                <br />• <strong>Качество кода:</strong> чистота, читаемость,
+                следование принципам SOLID
+                <br />• <strong>Типизация:</strong> эффективное использование
+                TypeScript для безопасности типов
+                <br />• <strong>Работа с состоянием:</strong> правильное
+                использование Effector для управления данными
+                <br />• <strong>Подход к решению:</strong> анализ задачи,
+                планирование, итеративная разработка
+                <br />• <strong>Коммуникация:</strong> способность объяснить
+                решения и обсудить альтернативы
+              </Typography>
+            </CardContent>
+          </Card>
+        </Stack>
 
         <Box sx={{ pt: 2 }}>
           <Button
@@ -61,7 +104,7 @@ export default function HomePage() {
             onClick={handleStartTasks}
             sx={{ px: 4, py: 2, fontSize: '1.1rem' }}
           >
-            Начать тестирование
+            Начать задание
           </Button>
         </Box>
       </Stack>
