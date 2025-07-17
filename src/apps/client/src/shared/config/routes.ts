@@ -1,13 +1,9 @@
 export const AppRoutes = {
   HOME: '/',
-  ANALYTICS: '/analytics',
-  CLIENTS: '/clients',
   TASKS: '/tasks',
 } as const;
 
 export const AppRouteChildren = {
-  ANALYTICS: 'analytics',
-  CLIENTS: 'clients',
   TASKS: 'tasks',
 } as const;
 

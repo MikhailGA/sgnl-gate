@@ -3,8 +3,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layout from './layout';
 import HomePage from '../pages/HomePage';
-import AnalyticsPage from '../pages/AnalyticsPage';
-import ClientsPage from '../pages/ClientsPage';
 import TasksPage from '../pages/TasksPage';
 import { AppRoutes, AppRouteChildren } from '../shared/config';
 
@@ -16,14 +14,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
-      },
-      {
-        path: AppRouteChildren.ANALYTICS,
-        element: <AnalyticsPage />,
-      },
-      {
-        path: AppRouteChildren.CLIENTS,
-        element: <ClientsPage />,
       },
       {
         path: AppRouteChildren.TASKS,

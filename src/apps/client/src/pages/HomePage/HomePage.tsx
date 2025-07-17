@@ -4,96 +4,66 @@ import {
   Typography,
   Card,
   CardContent,
-  Paper,
+  Button,
   Stack,
 } from '@mui/material';
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import { Api } from '../../shared/api/ApiClient';
+import WelcomeIcon from '@mui/icons-material/WavingHand';
+import CodeIcon from '@mui/icons-material/Code';
+import { useNavigate } from 'react-router';
+import { AppRoutes } from '../../shared/config';
 
 export default function HomePage() {
-  React.useEffect(function test() {
-    Api.instance.folderApi.folderControllerGetRootFolders().then((result) => {
-      console.log(result.data);
-    });
-  }, []);
+  const navigate = useNavigate();
+
+  const handleStartTasks = () => {
+    navigate(AppRoutes.TASKS);
+  };
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 1200 }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-        <HomeRoundedIcon sx={{ mr: 1, color: 'primary.main' }} />
-        <Typography variant="h4" component="h1" sx={{ fontWeight: 600 }}>
-          Главная страница
+    <Box sx={{ width: '100%', maxWidth: 800, mx: 'auto', textAlign: 'center' }}>
+      <Box sx={{ mb: 6 }}>
+        <WelcomeIcon sx={{ fontSize: 60, color: 'primary.main', mb: 2 }} />
+        <Typography variant="h3" component="h1" sx={{ fontWeight: 700, mb: 2 }}>
+          Добро пожаловать!
+        </Typography>
+        <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+          Система тестирования знаний TypeScript
         </Typography>
       </Box>
 
-      <Stack spacing={3}>
-        <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-          <Card sx={{ flex: '1 1 200px', minWidth: 200 }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Статистика
+      <Stack spacing={4}>
+        <Card sx={{ p: 4, textAlign: 'left' }}>
+          <CardContent>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+              <CodeIcon sx={{ mr: 2, color: 'primary.main' }} />
+              <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                О приложении
               </Typography>
-              <Typography variant="h3" color="primary">
-                1,234
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Общее количество записей
-              </Typography>
-            </CardContent>
-          </Card>
+            </Box>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+              Данное приложение предназначено для тестирования ваших знаний
+              TypeScript. Вам предстоит решить ряд задач, связанных с различными
+              аспектами языка.
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              • Работа со структурами данных и папками
+              <br />
+              • Типизация и интерфейсы
+              <br />• Практические задачи программирования
+            </Typography>
+          </CardContent>
+        </Card>
 
-          <Card sx={{ flex: '1 1 200px', minWidth: 200 }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Активные
-              </Typography>
-              <Typography variant="h3" color="success.main">
-                856
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Активные элементы
-              </Typography>
-            </CardContent>
-          </Card>
-
-          <Card sx={{ flex: '1 1 200px', minWidth: 200 }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                В ожидании
-              </Typography>
-              <Typography variant="h3" color="warning.main">
-                245
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Ожидающие обработки
-              </Typography>
-            </CardContent>
-          </Card>
-
-          <Card sx={{ flex: '1 1 200px', minWidth: 200 }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Ошибки
-              </Typography>
-              <Typography variant="h3" color="error.main">
-                12
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Элементы с ошибками
-              </Typography>
-            </CardContent>
-          </Card>
+        <Box sx={{ pt: 2 }}>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={handleStartTasks}
+            sx={{ px: 4, py: 2, fontSize: '1.1rem' }}
+          >
+            Начать тестирование
+          </Button>
         </Box>
-
-        <Paper sx={{ p: 3 }}>
-          <Typography variant="h6" gutterBottom>
-            Добро пожаловать в SGNL Gate
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            Это главная страница вашего приложения. Здесь вы можете увидеть
-            общую статистику и быстро перейти к основным функциям системы.
-          </Typography>
-        </Paper>
       </Stack>
     </Box>
   );
