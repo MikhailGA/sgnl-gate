@@ -25,3 +25,17 @@ export class FolderDto {
   })
   children: FolderDto[];
 }
+
+export class RootFolderDto {
+  @ApiProperty({
+    description: 'Folder ID',
+    example: 1,
+  })
+  id: number;
+
+  @ApiProperty({
+    description: 'Folder name',
+    example: 'Documents',
+  })
+  name: string;
+}

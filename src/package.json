@@ -5,7 +5,16 @@
   "engines": {
     "node": ">=20.17.0"
   },
-  "scripts": {},
+  "scripts": {
+    "frontend:serve": "nx run client:serve",
+    "frontend:build": "nx run client:build",
+    "frontend:test": "nx run client:test",
+    "frontend:e2e": "nx run client:e2e",
+    "backend:serve": "nx run server:serve --watch",
+    "backend:build": "nx run server:build",
+    "backend:test": "nx run server:test",
+    "backend:e2e": "nx run server:e2e"
+  },
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -26,6 +35,8 @@
     "axios": "^1.10.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
+    "effector": "^23.4.1",
+    "effector-react": "^23.3.0",
     "isbot": "^4.4.0",
     "morgan": "^1.10.0",
     "react": "19.0.0",

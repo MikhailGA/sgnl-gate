@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layout from './layout';
 import HomePage from '../pages/HomePage';
 import TasksPage from '../pages/TasksPage';
+import FoldersPage from '../pages/FoldersPage';
 import { AppRoutes, AppRouteChildren } from '../shared/config';
 
 const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: AppRouteChildren.TASKS,
         element: <TasksPage />,
+      },
+      {
+        path: AppRouteChildren.FOLDERS,
+        element: <FoldersPage />,
       },
     ],
   },

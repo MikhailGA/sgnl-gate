@@ -9,7 +9,7 @@ import {
   TreeParent,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { FolderDto } from '../dto/folder.dto';
+import { FolderDto, RootFolderDto } from '../dto/folder.dto';
 
 @Entity('folders')
 @Tree('closure-table')
@@ -48,6 +48,13 @@ export class Folder {
       name: folder.name,
       permissions: folder.permissions,
       children: folder.children.map((child) => Folder.toDto(child)),
+    };
+  }
+
+  static toRootDto(folder: Folder): RootFolderDto {
+    return {
+      id: folder.id,
+      name: folder.name,
     };
   }
 }

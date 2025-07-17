@@ -175,6 +175,25 @@ export interface FolderDto {
 /**
  * 
  * @export
+ * @interface RootFolderDto
+ */
+export interface RootFolderDto {
+    /**
+     * Folder ID
+     * @type {number}
+     * @memberof RootFolderDto
+     */
+    'id': number;
+    /**
+     * Folder name
+     * @type {string}
+     * @memberof RootFolderDto
+     */
+    'name': string;
+}
+/**
+ * 
+ * @export
  * @interface UpdateFolderDto
  */
 export interface UpdateFolderDto {
@@ -809,7 +828,7 @@ export const FoldersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async folderControllerGetRootFolders(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
+        async folderControllerGetRootFolders(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<RootFolderDto>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.folderControllerGetRootFolders(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['FoldersApi.folderControllerGetRootFolders']?.[localVarOperationServerIndex]?.url;
@@ -920,7 +939,7 @@ export const FoldersApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        folderControllerGetRootFolders(options?: any): AxiosPromise<Array<string>> {
+        folderControllerGetRootFolders(options?: any): AxiosPromise<Array<RootFolderDto>> {
             return localVarFp.folderControllerGetRootFolders(options).then((request) => request(axios, basePath));
         },
         /**

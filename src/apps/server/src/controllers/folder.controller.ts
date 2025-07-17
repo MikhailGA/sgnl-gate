@@ -14,7 +14,7 @@ import { ApiTags, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { FolderService } from '../services/folder.service';
 import { CreateFolderDto } from '../dto/create-folder.dto';
 import { UpdateFolderDto } from '../dto/update-folder.dto';
-import { FolderDto } from '../dto/folder.dto';
+import { FolderDto, RootFolderDto } from '../dto/folder.dto';
 import { Folder } from '../entities/folder.entity';
 import { AdvancedApiOperation } from '../utils';
 
@@ -57,12 +57,11 @@ export class FolderController {
   @ApiResponse({
     status: 200,
     description: 'List of all root folders',
-    type: [String],
+    type: [RootFolderDto],
   })
-  async getRootFolders(): Promise<string[]> {
-    return (await this.folderService.getRootFolders()).map((folder) =>
-      folder.id.toString(),
-    );
+  async getRootFolders(): Promise<RootFolderDto[]> {
+    const folders = await this.folderService.getRootFolders();
+    return folders.map((folder) => Folder.toRootDto(folder));
   }
 
   @Get('tree/:rootId')
