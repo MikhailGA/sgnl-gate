@@ -7,7 +7,7 @@ interface FoldersEmptyStateProps {
 }
 
 export const FoldersEmptyState: React.FC<FoldersEmptyStateProps> = ({
-  message = 'Нет доступных папок',
+  message = 'No available folders',
 }) => {
   return (
     <Box sx={{ width: '100%', maxWidth: 1000, mx: 'auto' }}>

@@ -13,7 +13,7 @@ export function TaskCard({
   title,
   description,
   route,
-  buttonText = 'Перейти к задаче',
+  buttonText = 'Go to task',
 }: TaskCardProps) {
   const navigate = useNavigate();
 

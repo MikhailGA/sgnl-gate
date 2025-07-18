@@ -5,12 +5,12 @@ import { AppRoutes } from './routes';
 
 export const mainListItems: MenuListItem[] = [
   {
-    text: 'Главная',
+    text: 'Home',
     icon: <HomeRoundedIcon />,
     path: AppRoutes.HOME,
   },
   {
-    text: 'Папки',
+    text: 'Folders',
     icon: <FolderRoundedIcon />,
     path: AppRoutes.FOLDERS,
   },

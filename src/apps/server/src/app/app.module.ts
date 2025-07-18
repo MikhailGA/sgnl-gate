@@ -15,7 +15,7 @@ import { join } from 'path';
       type: 'sqlite',
       database: join(process.cwd(), '.runtime', 'database.sqlite'),
       entities: [User, Folder],
-      synchronize: true, // В продакшене следует использовать migrations
+      synchronize: true, // Should use migrations in production
       logging: process.env.NODE_ENV === 'development',
     }),
     UserModule,

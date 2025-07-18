@@ -18,7 +18,7 @@ export class AppService {
     timestamp: string;
   }> {
     try {
-      // Проверяем подключение к базе данных
+      // Check database connection
       await this.dataSource.query('SELECT 1');
       return {
         database: 'connected',

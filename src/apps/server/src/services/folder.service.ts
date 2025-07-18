@@ -96,16 +96,16 @@ export class FolderService {
     let rootFolder: Folder;
 
     if (rootId) {
-      // Получаем конкретную корневую папку по ID
+      // Get specific root folder by ID
       rootFolder = await this.findOne(rootId);
-      // Проверяем, что это действительно корневая папка
+      // Check that this is actually a root folder
       if (rootFolder.parent) {
         throw new NotFoundException(
           `Folder with id ${rootId} is not a root folder`,
         );
       }
     } else {
-      // Получаем первую корневую папку (для обратной совместимости)
+      // Get first root folder (for backward compatibility)
       const roots = await this.folderRepository.findRoots();
       if (roots.length === 0) {
         return null;

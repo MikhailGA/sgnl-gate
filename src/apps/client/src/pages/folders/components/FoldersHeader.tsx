@@ -7,7 +7,7 @@ interface FoldersHeaderProps {
 }
 
 export const FoldersHeader: React.FC<FoldersHeaderProps> = ({
-  title = 'Задачи по структуре папок',
+  title = 'Folder Structure Tasks',
 }) => {
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', mb: 4 }}>

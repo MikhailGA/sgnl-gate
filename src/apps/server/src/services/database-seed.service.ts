@@ -13,67 +13,67 @@ export class DatabaseSeedService implements OnApplicationBootstrap {
   ) {}
 
   async onApplicationBootstrap() {
-    console.log('🔄 Очистка и сидирование данных...');
+    console.log('🔄 Clearing and seeding data...');
 
     try {
       await this.clearDatabase();
       await this.seedUsers();
       await this.seedFolders();
     } catch (error) {
-      console.error('❌ Ошибка при автоматическом сидировании:', error);
+      console.error('❌ Error during automatic seeding:', error);
     }
   }
 
   private async clearDatabase(): Promise<void> {
-    console.log('🗑️ Очистка базы данных...');
+    console.log('🗑️ Clearing database...');
 
     try {
-      // Удаляем все папки (сначала детей, потом родителей)
+      // Delete all folders (children first, then parents)
       await this.folderService.clear();
 
-      // Удаляем всех пользователей
+      // Delete all users
       await this.userService.clear();
 
-      console.log('✅ База данных очищена');
+      console.log('✅ Database cleared');
     } catch (error) {
-      console.error('❌ Ошибка при очистке базы данных:', error);
+      console.error('❌ Error clearing database:', error);
       throw error;
     }
   }
 
   private async seedUsers(): Promise<void> {
-    console.log('👥 Создание тестовых пользователей...');
+    console.log('👥 Creating test users...');
 
     const testUsers = [
       {
-        name: 'Иван Иванов',
+        name: 'John Doe',
         email: 'ivan@example.com',
         age: 25,
       },
       {
-        name: 'Мария Петрова',
+        name: 'Jane Smith',
         email: 'maria@example.com',
         age: 30,
       },
       {
-        name: 'Алексей Сидоров',
+        name: 'Alex Johnson',
         email: 'alexey@example.com',
       },
     ];
 
     for (const userData of testUsers) {
       await this.userService.create(userData);
-      console.log(`✅ Создан пользователь: ${userData.name}`);
+      console.log(`✅ User created: ${userData.name}`);
     }
 
-    console.log('🎉 Тестовые пользователи успешно добавлены!');
+    console.log('🎉 Test users successfully added!');
   }
 
   private async seedFolders(): Promise<void> {
-    console.log('📁 Создание структуры папок из JSON файлов...');
+    console.log('📁 Creating folder structure from JSON files...');
 
     try {
-      // Путь к папке seeds относительно корня проекта
+      // Path to seeds folder relative to project root
       const seedsPath = path.join(
         process.cwd(),
         'apps/server/src/seeds/folders',
@@ -83,27 +83,29 @@ export class DatabaseSeedService implements OnApplicationBootstrap {
         .filter((file) => file.endsWith('.json'));
 
       if (jsonFiles.length === 0) {
-        console.log('⚠️  Нет JSON файлов для сидирования папок');
+        console.log('⚠️  No JSON files for folder seeding');
         return;
       }
 
-      // Создаем структуру из каждого JSON файла
+      // Create structure from each JSON file
       for (const jsonFile of jsonFiles) {
         const filePath = path.join(seedsPath, jsonFile);
 
-        console.log(`📄 Обработка файла: ${jsonFile}`);
+        console.log(`📄 Processing file: ${jsonFile}`);
 
         const jsonContent = fs.readFileSync(filePath, 'utf8');
         const rootNode: FolderSeedNode = JSON.parse(jsonContent);
 
         await this.createFolderFromSeedNode(rootNode);
 
-        console.log(`✅ Структура из ${jsonFile} создана успешно!`);
+        console.log(`✅ Structure from ${jsonFile} created successfully!`);
       }
 
-      console.log(`🎉 Создано ${jsonFiles.length} независимых структур папок!`);
+      console.log(
+        `🎉 Created ${jsonFiles.length} independent folder structures!`,
+      );
     } catch (error) {
-      console.error('❌ Ошибка при создании папок из JSON:', error);
+      console.error('❌ Error creating folders from JSON:', error);
       throw error;
     }
   }
@@ -118,9 +120,9 @@ export class DatabaseSeedService implements OnApplicationBootstrap {
       parentId,
     });
 
-    console.log(`✅ Создана папка: ${node.name}`);
+    console.log(`✅ Folder created: ${node.name}`);
 
-    // Рекурсивно создаем дочерние папки
+    // Recursively create child folders
     for (const child of node.children) {
       await this.createFolderFromSeedNode(child, folder.id);
     }

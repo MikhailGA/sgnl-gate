@@ -22,10 +22,11 @@ export const FolderTabPanel: React.FC<FolderTabPanelProps> = ({
       {children || (
         <>
           <Typography variant="h6" gutterBottom>
-            Содержимое папки: {folder.name}
+            Folder content: {folder.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Здесь будет отображаться содержимое папки с ID: {folder.id}
+            This is where the folder content with ID: {folder.id} will be
+            displayed
           </Typography>
         </>
       )}

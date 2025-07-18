@@ -9,16 +9,15 @@ export default function HomePage() {
       <Box sx={{ mb: 6, textAlign: 'center' }}>
         <TaskIcon sx={{ fontSize: 60, color: 'primary.main', mb: 2 }} />
         <Typography variant="h3" component="h1" sx={{ fontWeight: 700, mb: 2 }}>
-          Задачи
+          Tasks
         </Typography>
         <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
-          Выберите задачу для выполнения
+          Select a task to perform
         </Typography>
       </Box>
 
       <Stack spacing={3}>
         <FolderTask />
-        {/* Здесь можно добавить новые задачи */}
       </Stack>
     </Box>
   );
