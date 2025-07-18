@@ -116,6 +116,9 @@ importers:
       url:
         specifier: ^0.11.4
         version: 0.11.4
+      uuid:
+        specifier: ^11.1.0
+        version: 11.1.0
     devDependencies:
       '@eslint/js':
         specifier: ^9.8.0
