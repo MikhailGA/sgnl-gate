@@ -74,10 +74,7 @@ export class DatabaseSeedService implements OnApplicationBootstrap {
 
     try {
       // Path to seeds folder relative to project root
-      const seedsPath = path.join(
-        process.cwd(),
-        'apps/server/src/seeds/folders',
-      );
+      const seedsPath = path.join(process.cwd(), 'seeds/folders');
       const jsonFiles = fs
         .readdirSync(seedsPath)
         .filter((file) => file.endsWith('.json'));
