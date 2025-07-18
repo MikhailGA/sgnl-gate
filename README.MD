@@ -25,7 +25,7 @@ A full-featured web application built using modern technology stack based on Nx 
 ## 📋 Requirements
 
 - **Node.js**: >= 20.17.0
-- **npm**: >= 8.0.0 (or yarn/pnpm)
+- **pnpm**: >= 9.12.3 (recommended package manager)
 - **Git**: for repository management
 
 ## 🛠 Installation and Setup
@@ -38,7 +38,7 @@ cd sgnl-gate/src
 
 ### 2. Install dependencies
 ```bash
-npm install
+pnpm install
 ```
 
 ### 3. Run the project
@@ -55,13 +55,13 @@ npm install
 **Frontend (Client):**
 ```bash
 cd src
-npx nx serve client
+pnpm nx serve client
 ```
 
 **Backend (Server):**
 ```bash
 cd src
-npx nx serve server
+pnpm nx serve server
 ```
 
 ## 🧪 Testing
@@ -69,20 +69,20 @@ npx nx serve server
 ### Run all tests
 ```bash
 cd src
-npx nx test
+pnpm nx test
 ```
 
 ### Run tests for specific project
 ```bash
 cd src
-npx nx test client
-npx nx test server
+pnpm nx test client
+pnpm nx test server
 ```
 
 ### Run tests in watch mode
 ```bash
 cd src
-npx nx test client --watch
+pnpm nx test client --watch
 ```
 
 ## 🔍 Linting and Formatting
@@ -90,8 +90,8 @@ npx nx test client --watch
 ### Code linting
 ```bash
 cd src
-npx nx lint client
-npx nx lint server
+pnpm nx lint client
+pnpm nx lint server
 ```
 ## 📁 Project Structure
 
@@ -139,7 +139,7 @@ This script:
    ```bash
    git clone https://github.com/MikhailGA/sgnl-gate.git
    cd sgnl-gate
-   cd src && npm install
+   cd src && pnpm install
    ```
 
 2. **Run in development mode:**
