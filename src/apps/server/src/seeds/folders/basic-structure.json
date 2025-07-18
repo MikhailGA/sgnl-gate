@@ -1,6 +1,6 @@
 {
   "name": "Root",
-  "permissions": true,
+  "permissions": false,
   "children": [
     {
       "name": "Documents",

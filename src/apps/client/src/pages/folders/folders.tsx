@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box } from '@mui/material';
+import { Box, Drawer } from '@mui/material';
 import { FolderEntity } from '@client/entities';
 import {
   FoldersHeader,
@@ -9,6 +9,7 @@ import {
   FolderTabPanel,
 } from './components';
 import { useFolderTabs } from './hooks';
+import { Task } from './Task';
 
 export default function FoldersPage() {
   const { rootFolders, loading } = FolderEntity.useRootFolders();
@@ -16,6 +17,8 @@ export default function FoldersPage() {
     rootFolders,
     loading,
   });
+
+  const selectedRoot = rootFolders.find(({ id }) => String(id) === activeTab);
 
   if (loading) {
     return <FoldersLoader />;
@@ -27,6 +30,7 @@ export default function FoldersPage() {
 
   return (
     <Box sx={{ width: '100%', maxWidth: 1000, mx: 'auto' }}>
+      <Task></Task>
       <FoldersHeader />
 
       <FoldersTabs
@@ -35,14 +39,8 @@ export default function FoldersPage() {
         onTabChange={handleTabChange}
       />
 
-      <Box sx={{ mt: 3 }}>
-        {rootFolders.map((folder) => (
-          <FolderTabPanel
-            key={folder.id}
-            folder={folder}
-            isActive={activeTab === String(folder.id)}
-          />
-        ))}
+      <Box mt={3}>
+        {selectedRoot && <FolderTabPanel folder={selectedRoot} isActive />}
       </Box>
     </Box>
   );

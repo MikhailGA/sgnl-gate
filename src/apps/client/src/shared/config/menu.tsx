@@ -14,4 +14,9 @@ export const mainListItems: MenuListItem[] = [
     icon: <FolderRoundedIcon />,
     path: AppRoutes.FOLDERS,
   },
+  {
+    text: 'Files',
+    icon: <FolderRoundedIcon />,
+    path: AppRoutes.FILES,
+  },
 ];

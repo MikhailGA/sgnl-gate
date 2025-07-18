@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { RootFolderDto } from '@client/shared/api';
+import { FoldersFilteredTree, FoldersTree } from './FolderTree';
 
 interface FolderTabPanelProps {
   folder: RootFolderDto;
@@ -20,15 +21,10 @@ export const FolderTabPanel: React.FC<FolderTabPanelProps> = ({
       sx={{ display: isActive ? 'block' : 'none' }}
     >
       {children || (
-        <>
-          <Typography variant="h6" gutterBottom>
-            Folder content: {folder.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            This is where the folder content with ID: {folder.id} will be
-            displayed
-          </Typography>
-        </>
+        <Stack direction="row" mt={3} spacing={3}>
+          <FoldersTree id={folder.id} />
+          <FoldersFilteredTree id={folder.id} />
+        </Stack>
       )}
     </Box>
   );

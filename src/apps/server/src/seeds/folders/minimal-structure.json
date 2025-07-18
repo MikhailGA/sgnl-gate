@@ -1,15 +1,15 @@
 {
   "name": "Simple",
-  "permissions": true,
+  "permissions": false,
   "children": [
     {
       "name": "Work",
-      "permissions": true,
+      "permissions": false,
       "children": []
     },
     {
       "name": "Personal",
-      "permissions": true,
+      "permissions": false,
       "children": []
     },
     {

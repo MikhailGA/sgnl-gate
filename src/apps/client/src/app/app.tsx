@@ -3,6 +3,7 @@ import Layout from './layout';
 import { AppRouteChildren, AppRoutes } from '@client/shared/config';
 import HomePage from '@client/pages/home';
 import FoldersPage from '@client/pages/folders';
+import FilesPage from '@client/pages/files';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: AppRouteChildren.FOLDERS,
         element: <FoldersPage />,
+      },
+      {
+        path: AppRouteChildren.FILES,
+        element: <FilesPage />,
       },
     ],
   },

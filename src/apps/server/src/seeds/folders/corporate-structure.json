@@ -1,10 +1,10 @@
 {
   "name": "Corporate",
-  "permissions": true,
+  "permissions": false,
   "children": [
     {
       "name": "Departments",
-      "permissions": true,
+      "permissions": false,
       "children": [
         {
           "name": "HR",
