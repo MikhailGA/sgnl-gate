@@ -1,8 +1,14 @@
 import { sample } from 'effector';
-import { FilesGate, getFilesFx, uploadFileFx, $files } from './store';
+import {
+  FilesGate,
+  getFilesFx,
+  uploadFileFx,
+  deleteFilesFx,
+  $files,
+} from './store';
 
 sample({
-  clock: [FilesGate.open, uploadFileFx.doneData],
+  clock: [FilesGate.open, uploadFileFx.doneData, deleteFilesFx.doneData],
   target: getFilesFx,
 });
 

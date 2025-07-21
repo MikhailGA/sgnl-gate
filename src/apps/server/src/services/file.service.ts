@@ -1,18 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { SimpleDto } from '../dto/simple.dto';
-import { simulateResponseDelay } from '../utils/mockSpeed';
-import { Repository } from 'typeorm';
-import { CreateFileDto } from '../dto/create-file.dto';
-import { UploadFileDto } from '../dto/upload-file.dto';
-import { File } from '../entities/file.entity';
+import { DeleteFileDto } from '../dto/delete-file.dto';
+import { In, Repository } from 'typeorm';
 import { v4 as uuid } from 'uuid';
+import { CreateFileDto } from '../dto/create-file.dto';
+import { SimpleDto } from '../dto/simple.dto';
+import { FileEntity } from '../entities/file.entity';
 
 @Injectable()
 export class FileService {
   constructor(
-    @InjectRepository(File)
-    private fileRepository: Repository<File>,
+    @InjectRepository(FileEntity)
+    private fileRepository: Repository<FileEntity>,
   ) {}
 
   async create(createFileDto: CreateFileDto): Promise<SimpleDto> {
@@ -23,16 +22,19 @@ export class FileService {
     });
   }
 
-  async upload(uploadFileDto: UploadFileDto): Promise<SimpleDto> {
-    await simulateResponseDelay({
-      fileSizeBytes: uploadFileDto.size,
-      speedBytesPerSec: 3000, // 3mb/sec
-    });
-
+  async upload(): Promise<SimpleDto> {
     return { id: uuid() };
   }
 
-  async findAll(): Promise<File[]> {
+  async findAll(): Promise<FileEntity[]> {
     return await this.fileRepository.find();
+  }
+
+  async remove(payload: DeleteFileDto): Promise<void> {
+    await this.fileRepository.softDelete({
+      id: In(payload.ids),
+    });
+
+    return;
   }
 }

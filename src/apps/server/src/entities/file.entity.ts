@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 
 @Entity('files')
-export class File {
+export class FileEntity {
   @ApiProperty({ description: 'Unique folder identifier' })
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -34,7 +34,7 @@ export class File {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  static toDto(file: File): FileDto {
+  static toDto(file: FileEntity): FileDto {
     return {
       id: file.id,
       name: file.name,

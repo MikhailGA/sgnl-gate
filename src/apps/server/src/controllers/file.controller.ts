@@ -1,19 +1,23 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpException,
   HttpStatus,
-  Logger,
   Post,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
-import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiBody, ApiConsumes, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { UploadFileDto } from '../dto/upload-file.dto';
 import { CreateFileDto } from '../dto/create-file.dto';
 import { SimpleDto } from '../dto/simple.dto';
-import { UploadFileDto } from '../dto/upload-file.dto';
-import { File } from '../entities/file.entity';
+import { FileEntity } from '../entities/file.entity';
 import { FileService } from '../services/file.service';
 import { AdvancedApiOperation } from '../utils';
+import { DeleteFileDto } from '../dto/delete-file.dto';
 
 @ApiTags('files')
 @Controller('files')
@@ -41,14 +45,18 @@ export class FileController {
 
   @Post('upload')
   @AdvancedApiOperation()
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({ type: UploadFileDto })
   @ApiResponse({
     status: 201,
     description: 'file successfully created',
     type: SimpleDto,
   })
-  async upload(@Body() uploadFileDto: UploadFileDto): Promise<SimpleDto> {
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadFile(@UploadedFile() file: Express.Multer.File) {
+    console.log('🚀 ~ FileController ~ uploadFile ~ file:', file);
     try {
-      return await this.fileService.upload(uploadFileDto);
+      return await this.fileService.upload();
     } catch (error) {
       throw new HttpException(
         error.message || 'Failed to create file',
@@ -62,9 +70,19 @@ export class FileController {
   @ApiResponse({
     status: 200,
     description: 'List of all files',
-    type: [File],
+    type: [FileEntity],
   })
-  async findAll(): Promise<File[]> {
+  async findAll(): Promise<FileEntity[]> {
     return await this.fileService.findAll();
+  }
+
+  @Delete('delete')
+  @AdvancedApiOperation()
+  @ApiResponse({
+    status: 201,
+    description: 'delete files',
+  })
+  async delete(@Body() payload: DeleteFileDto): Promise<void> {
+    await this.fileService.remove(payload);
   }
 }

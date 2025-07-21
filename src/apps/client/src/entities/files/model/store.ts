@@ -1,4 +1,6 @@
-import { createEffect, createEvent, restore } from 'effector';
+import { Api, DeleteFileDto } from '@client/shared/api';
+import { AxiosProgressEvent } from 'axios';
+import { createEffect, restore } from 'effector';
 import { createGate } from 'effector-react';
 
 //Gates
@@ -6,12 +8,31 @@ export const FilesGate = createGate<void>();
 
 // Effects
 export const getFilesFx = createEffect(() => {
-  return [1, 2, 3, 4];
+  return Api.instance.filesApi.fileControllerFindAll().then((r) => r.data);
 });
 
-type FileUploadDto = { file: File };
-const uploadFile = ({ file }: FileUploadDto) => {
-  return Promise.resolve();
+export const deleteFilesFx = createEffect((args: DeleteFileDto) => {
+  return Api.instance.filesApi.fileControllerDelete(args).then((r) => r.data);
+});
+
+type FileUploadDto = {
+  file: File;
+  onUploadProgress: (progressEvent: AxiosProgressEvent) => void;
+};
+
+const uploadFile = ({ file, onUploadProgress }: FileUploadDto) => {
+  return Api.instance.filesApi
+    .fileControllerUploadFile(file, {
+      onUploadProgress,
+    })
+    .then(({ data }) => data)
+    .then(({ id }) => {
+      Api.instance.filesApi.fileControllerCreate({
+        name: file.name,
+        objectId: id,
+        size: file.size,
+      });
+    });
 };
 
 export const uploadFileFx = createEffect(uploadFile);

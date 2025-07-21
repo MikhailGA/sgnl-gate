@@ -9,6 +9,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import './entities/init';
+import './features/init';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

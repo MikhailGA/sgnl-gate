@@ -45,6 +45,31 @@ export interface AppControllerCheckDatabase200Response {
 /**
  * 
  * @export
+ * @interface CreateFileDto
+ */
+export interface CreateFileDto {
+    /**
+     * file name
+     * @type {string}
+     * @memberof CreateFileDto
+     */
+    'name': string;
+    /**
+     * objectId
+     * @type {string}
+     * @memberof CreateFileDto
+     */
+    'objectId': string;
+    /**
+     * file size name
+     * @type {number}
+     * @memberof CreateFileDto
+     */
+    'size': number;
+}
+/**
+ * 
+ * @export
  * @interface CreateFolderDto
  */
 export interface CreateFolderDto {
@@ -91,6 +116,62 @@ export interface CreateUserDto {
      * @memberof CreateUserDto
      */
     'age'?: number;
+}
+/**
+ * 
+ * @export
+ * @interface DeleteFileDto
+ */
+export interface DeleteFileDto {
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof DeleteFileDto
+     */
+    'ids': Array<string>;
+}
+/**
+ * 
+ * @export
+ * @interface FileEntity
+ */
+export interface FileEntity {
+    /**
+     * Unique folder identifier
+     * @type {string}
+     * @memberof FileEntity
+     */
+    'id': string;
+    /**
+     * s3 object Id
+     * @type {string}
+     * @memberof FileEntity
+     */
+    'objectId': string;
+    /**
+     * file name
+     * @type {string}
+     * @memberof FileEntity
+     */
+    'name': string;
+    /**
+     * file size
+     * @type {number}
+     * @memberof FileEntity
+     */
+    'size': number;
+    /**
+     * Record creation date
+     * @type {Date}
+     * @memberof FileEntity
+     */
+    'createdAt': Date;
+    /**
+     * Last update date
+     * @type {Date}
+     * @memberof FileEntity
+     */
+    'updatedAt': Date;
 }
 /**
  * 
@@ -190,6 +271,19 @@ export interface RootFolderDto {
      * @memberof RootFolderDto
      */
     'name': string;
+}
+/**
+ * 
+ * @export
+ * @interface SimpleDto
+ */
+export interface SimpleDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof SimpleDto
+     */
+    'id': string;
 }
 /**
  * 
@@ -431,6 +525,325 @@ export class AppApi extends BaseAPI {
      */
     public appControllerGetData(options?: RawAxiosRequestConfig) {
         return AppApiFp(this.configuration).appControllerGetData(options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * FilesApi - axios parameter creator
+ * @export
+ */
+export const FilesApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary create
+         * @param {CreateFileDto} createFileDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileControllerCreate: async (createFileDto: CreateFileDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createFileDto' is not null or undefined
+            assertParamExists('fileControllerCreate', 'createFileDto', createFileDto)
+            const localVarPath = `/api/files/create`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createFileDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary delete
+         * @param {DeleteFileDto} deleteFileDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileControllerDelete: async (deleteFileDto: DeleteFileDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'deleteFileDto' is not null or undefined
+            assertParamExists('fileControllerDelete', 'deleteFileDto', deleteFileDto)
+            const localVarPath = `/api/files/delete`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(deleteFileDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary findAll
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileControllerFindAll: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/files`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary uploadFile
+         * @param {File} file 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileControllerUploadFile: async (file: File, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'file' is not null or undefined
+            assertParamExists('fileControllerUploadFile', 'file', file)
+            const localVarPath = `/api/files/upload`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new ((configuration && configuration.formDataCtor) || FormData)();
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * FilesApi - functional programming interface
+ * @export
+ */
+export const FilesApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = FilesApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary create
+         * @param {CreateFileDto} createFileDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fileControllerCreate(createFileDto: CreateFileDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SimpleDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fileControllerCreate(createFileDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.fileControllerCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary delete
+         * @param {DeleteFileDto} deleteFileDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fileControllerDelete(deleteFileDto: DeleteFileDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fileControllerDelete(deleteFileDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.fileControllerDelete']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary findAll
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fileControllerFindAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<FileEntity>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fileControllerFindAll(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.fileControllerFindAll']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @summary uploadFile
+         * @param {File} file 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async fileControllerUploadFile(file: File, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SimpleDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.fileControllerUploadFile(file, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['FilesApi.fileControllerUploadFile']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * FilesApi - factory interface
+ * @export
+ */
+export const FilesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = FilesApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary create
+         * @param {CreateFileDto} createFileDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileControllerCreate(createFileDto: CreateFileDto, options?: any): AxiosPromise<SimpleDto> {
+            return localVarFp.fileControllerCreate(createFileDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary delete
+         * @param {DeleteFileDto} deleteFileDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileControllerDelete(deleteFileDto: DeleteFileDto, options?: any): AxiosPromise<void> {
+            return localVarFp.fileControllerDelete(deleteFileDto, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary findAll
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileControllerFindAll(options?: any): AxiosPromise<Array<FileEntity>> {
+            return localVarFp.fileControllerFindAll(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary uploadFile
+         * @param {File} file 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        fileControllerUploadFile(file: File, options?: any): AxiosPromise<SimpleDto> {
+            return localVarFp.fileControllerUploadFile(file, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * FilesApi - object-oriented interface
+ * @export
+ * @class FilesApi
+ * @extends {BaseAPI}
+ */
+export class FilesApi extends BaseAPI {
+    /**
+     * 
+     * @summary create
+     * @param {CreateFileDto} createFileDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesApi
+     */
+    public fileControllerCreate(createFileDto: CreateFileDto, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).fileControllerCreate(createFileDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary delete
+     * @param {DeleteFileDto} deleteFileDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesApi
+     */
+    public fileControllerDelete(deleteFileDto: DeleteFileDto, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).fileControllerDelete(deleteFileDto, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary findAll
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesApi
+     */
+    public fileControllerFindAll(options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).fileControllerFindAll(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary uploadFile
+     * @param {File} file 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof FilesApi
+     */
+    public fileControllerUploadFile(file: File, options?: RawAxiosRequestConfig) {
+        return FilesApiFp(this.configuration).fileControllerUploadFile(file, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

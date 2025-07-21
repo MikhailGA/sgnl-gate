@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { File } from '../entities/file.entity';
+import { FileEntity } from '../entities/file.entity';
 import { FileModule } from '../modules/file.module';
 import { join } from 'path';
 import { Folder } from '../entities/folder.entity';
@@ -16,7 +16,7 @@ import { AppService } from './app.service';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: join(process.cwd(), '.runtime', 'database.sqlite'),
-      entities: [User, Folder, File],
+      entities: [User, Folder, FileEntity],
       synchronize: true, // Should use migrations in production
       logging: process.env.NODE_ENV === 'development',
     }),
