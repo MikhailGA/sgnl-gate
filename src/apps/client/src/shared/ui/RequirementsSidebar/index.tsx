@@ -1,6 +1,5 @@
 import { MarkdownView } from '@client/shared/ui';
 import CloseIcon from '@mui/icons-material/Close';
-import GTranslateIcon from '@mui/icons-material/GTranslate';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { Drawer, IconButton, Stack } from '@mui/material';
 import { useState } from 'react';
@@ -20,10 +19,7 @@ export const RequirementsSidebar = ({ requirements }: Props) => {
         variant="persistent"
       >
         <Stack spacing={1} px={2} py={1} width={400}>
-          <Stack direction="row" justifyContent="space-between">
-            <IconButton onClick={() => setEn((s) => !s)}>
-              <GTranslateIcon />
-            </IconButton>
+          <Stack direction="row" justifyContent="flex-end">
             <IconButton onClick={() => setOpen((s) => !s)}>
               <CloseIcon />
             </IconButton>
