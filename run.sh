@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 set +x
 
-PROJECT_ROOT=$(pwd)
+# Get the directory where this script is located
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="${SCRIPT_DIR}"
 NX_ROOT=${PROJECT_ROOT}/src
 
 # Check and start nx daemon if needed
-cd "${NX_ROOT}"
+cd "${NX_ROOT}" || exit
 
 echo "Checking nx daemon status..."
 DAEMON_STATUS=$(pnpx nx daemon --status 2>&1)
