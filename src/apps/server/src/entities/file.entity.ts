@@ -3,6 +3,7 @@ import { FileDto } from '../dto/file.dto';
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -33,6 +34,10 @@ export class FileEntity {
   @ApiProperty({ description: 'Last update date' })
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ApiProperty({ description: 'Soft delete date' })
+  @DeleteDateColumn()
+  deletedAt?: Date;
 
   static toDto(file: FileEntity): FileDto {
     return {
