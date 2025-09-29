@@ -40,7 +40,9 @@ async function bootstrap() {
   SwaggerModule.setup('swagger', app, document);
 
   const port = process.env.PORT || 3001;
-  await app.listen(port);
+  const host = '0.0.0.0'; // listen on all interfaces
+
+  await app.listen(port, host);
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`,
   );

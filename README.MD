@@ -2,9 +2,30 @@
 
 A full-featured web application built using modern technology stack based on Nx monorepo.
 
+## Running the App in VS Code Dev Container
+
+Follow these steps to set up your development environment inside a VS Code Dev Container:
+
+### Prerequisites
+
+Make sure you have installed on your host machine:
+
+- Docker
+- VS Code
+- VS Code Remote - Containers extension
+
+---
+
+### Open the Project in a Dev Container
+
+1. Open VS Code.
+2. Press `F1` or `cmd + shift + p` → type **“Remote-Containers: Open Folder in Container…”** → select the project folder.
+3. VS Code will build the container and open the workspace inside it.
+
 ## 🚀 Technology Stack
 
 ### Frontend (Client)
+
 - **React 19** - JavaScript library for building user interfaces
 - **React Router v7** - Routing for React applications
 - **TypeScript** - Strongly typed JavaScript
@@ -12,11 +33,13 @@ A full-featured web application built using modern technology stack based on Nx 
 - **SCSS** - CSS preprocessor
 
 ### Backend (Server)
+
 - **NestJS** - Progressive Node.js framework
 - **TypeScript** - Strongly typed JavaScript
 - **Swagger/OpenAPI** - API documentation and generation
 
 ### Development Tools
+
 - **Nx** - Monorepo development platform
 - **Jest** - Testing framework
 - **ESLint** - JavaScript/TypeScript linter
@@ -31,12 +54,14 @@ A full-featured web application built using modern technology stack based on Nx 
 ## 🛠 Installation and Setup
 
 ### 1. Clone the repository
+
 ```bash
 git clone https://github.com/MikhailGA/sgnl-gate.git
 cd sgnl-gate/src
 ```
 
 ### 2. Install dependencies
+
 ```bash
 pnpm install
 ```
@@ -46,6 +71,7 @@ pnpm install
 #### Quick start (recommended)
 
 **Run frontend and backend simultaneously:**
+
 ```bash
 ./run.sh
 ```
@@ -53,12 +79,14 @@ pnpm install
 #### Manual development mode
 
 **Frontend (Client):**
+
 ```bash
 cd src
 pnpm nx serve client
 ```
 
 **Backend (Server):**
+
 ```bash
 cd src
 pnpm nx serve server
@@ -67,12 +95,14 @@ pnpm nx serve server
 ## 🧪 Testing
 
 ### Run all tests
+
 ```bash
 cd src
 pnpm nx test
 ```
 
 ### Run tests for specific project
+
 ```bash
 cd src
 pnpm nx test client
@@ -80,6 +110,7 @@ pnpm nx test server
 ```
 
 ### Run tests in watch mode
+
 ```bash
 cd src
 pnpm nx test client --watch
@@ -88,11 +119,13 @@ pnpm nx test client --watch
 ## 🔍 Linting and Formatting
 
 ### Code linting
+
 ```bash
 cd src
 pnpm nx lint client
 pnpm nx lint server
 ```
+
 ## 📁 Project Structure
 
 ```
@@ -130,12 +163,14 @@ The project includes automatic TypeScript client generation from Swagger specifi
 ```
 
 This script:
+
 1. Fetches Swagger specification from `http://localhost:3001/swagger-json`
 2. Generates TypeScript API clients in `src/apps/client/src/shared/api/generated`
 
 ## 🚀 Quick Start for Developers
 
 1. **Clone and install:**
+
    ```bash
    git clone https://github.com/MikhailGA/sgnl-gate.git
    cd sgnl-gate
@@ -143,6 +178,7 @@ This script:
    ```
 
 2. **Run in development mode:**
+
    ```bash
    ./run.sh
    ```
