@@ -4,6 +4,7 @@ import { AppModule } from './app/app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import morgan from 'morgan';
 import { json } from 'express';
+import 'multer';
 
 async function bootstrap() {
   const globalPrefix = 'api';

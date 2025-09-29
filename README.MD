@@ -47,7 +47,7 @@ Make sure you have installed on your host machine:
 
 ## 📋 Requirements
 
-- **Node.js**: >= 20.17.0
+- **Node.js**: >= 24.4.1
 - **pnpm**: >= 9.12.3 (recommended package manager)
 - **Git**: for repository management
 
